@@ -1,0 +1,116 @@
+# Data Exploration ASSIGNMENT
+
+# a.	Extracting 'InternetService' column
+
+customer_churn <- read.csv("Customer_Churn.csv", TRUE, ",")
+
+customer_churn$InternetService
+
+
+# b.	Extracting 'PaperlessBilling' column
+customer_churn$PaperlessBilling
+
+# c.	Extracting 'StreamingTV' column
+customer_churn$StreamingTV
+
+# Extracting 3rd, 6th & 9th columns. CTM
+customer_churn[,c(3,6,9)]
+
+# .Extracting all the columns from column number-10 to column number-20
+customer_churn[,10:20]
+
+# Extracting row numbers 65, 765, 3726 & 7000
+customer_churn[c(65, 765, 3726),]
+
+# Extracting all the rows from 655 to 6550
+customer_churn[655:6550,]
+
+# Extract row numbers- 10, 100 & 1000 & column numbers- 5, 10, 15
+customer_churn[c(10,100,100), c(5,10,15)]
+
+# Flow Control Statements:
+# 1.	Check if the value in the 6th cell of 'PaymentMethod' column is 'Electronic check'. If yes, print "Yes, the payment method is Electronic check"
+
+if(customer_churn$PaymentMethod[6]=="Electronic check"){
+   print("Yes, the payment method is Electronic check")
+}
+
+
+# 2.	Check the value present in 12th cell of 'Contract' column. 
+# If it's 'month-to-month', print 'The contract is on a month to month basis'
+# If it's 'One year', print 'The contract is on a yearly basis'
+# If it's 'Two year', print 'The contract is on a two-year basis'
+
+if(customer_churn$Contract[12]=="month-to-month"){
+  print("The contract is on a month to month basis")
+}else if(customer_churn$Contract[12]=="One year"){
+  print("The contract is on a yearly basis")
+}else if(customer_churn$Contract[12]=="Two year"){
+  print("The contract is on a two-year basis")
+}
+
+
+# 3.	Use switch to check the gender in 6th cell of 'gender' column.
+# If it's 'Male', give a discount of 20% in 'MonthlyCharges'
+# If it's 'Female', give a discount of 50% in 'MonthlyCharges'
+
+switch (as.character(customer_churn$gender[6]),
+        "Male"=customer_churn$MonthlyCharges[6]*0.8, 
+        "Female"=customer_churn$MonthlyCharges[6]*0.5)
+
+# 4.	Use for loop to get the count of customers whose 'InternetService' is 'DSL'
+count=0
+for(i in 1:nrow(customer_churn)){
+  if(customer_churn$InternetService[i] == "DSL"){
+    count = count + 1
+  }
+}
+count
+
+
+# 5.	Use while to find the number of customers whose tenure is exactly '2' months
+count=0
+i=1
+while(i<=nrow(customer_churn)){
+  if(customer_churn$tenure[i]==2){
+    count=count+1
+  }
+  i=i+1
+}
+
+count
+
+
+####################### INBUILT FUNCTION QUESTIONS #######################
+
+#1.	Do these operations with the head() function:
+  #a.	Get the first 4 records from 'PhoneService' column
+  #b.	Get the first 8 records from 'Contract' column
+
+head(customer_churn$PhoneService,4)
+head(customer_churn$Contract,8)
+
+
+# 2.	Do these operations with the tail() function:
+# a.	Get the last record of 'TotalCharges' column
+# b.	Get the last 5 records of 'tenure' column
+
+tail(customer_churn$TotalCharges,1)
+tail(customer_churn$tenure,5)
+
+
+# 3. Find the average, minimum, maximum & range from the 'tenure' column
+mean(customer_churn$tenure)
+min(customer_churn$tenure)
+max(customer_churn$tenure)
+range(customer_churn$tenure)
+
+
+# 4. Getting 10 random values from the 'TotalCharges' column using sample()
+sample(customer_churn$TotalCharges, 10)
+
+# 5.	Find the count of different levels in 'PaymentMethod' & 'Contract' columns using table()
+
+table(customer_churn$PaymentMethod)
+table(customer_churn$Contract)
+
